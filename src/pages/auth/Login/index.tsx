@@ -18,7 +18,7 @@ export const Login = () => {
     const { email, password } = values;
     const response = await auth.authenticate(email, password);
     if (response) {
-      navigate("/profile");
+      navigate("/chat");
     } else {
       setError("E-mail ou senha incorretos. Por favor, tente novamente.");
     }
