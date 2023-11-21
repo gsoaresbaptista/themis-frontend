@@ -1,8 +1,18 @@
-function Logo() {
+function Logo({ bigVersion }: { bigVersion: boolean }) {
+  const scale = bigVersion ? 1.1 : 1;
+
   return (
     <div className="flex items-center gap-2">
-      <div className="w-10 h-10 dark:fill-primary fill-black">
-        <svg width="40px" height="40px" viewBox="0 0 40 40">
+      <div
+        className={`w-[${40 * scale}px] h-[${
+          40 * scale
+        }px] dark:fill-white fill-black`}
+      >
+        <svg
+          width={`${40 * scale}px`}
+          height={`${40 * scale}px`}
+          viewBox="0 0 40 40"
+        >
           <path
             d="M 39.738281 20.136719 C 39.136719 19.480469 38.351562 19.015625 37.480469 18.71875
                  C 36.617188 18.429688 35.652344 18.296875 34.636719 18.296875
@@ -59,7 +69,11 @@ function Logo() {
           />
         </svg>
       </div>
-      <h2 className="dark:text-primary text-black font-space-grotesk text-lg font-medium">
+      <h2
+        className={`dark:text-white text-black font-space-grotesk font-bold ${
+          bigVersion ? "text-3xl" : "text-lg"
+        }`}
+      >
         Themis
       </h2>
     </div>

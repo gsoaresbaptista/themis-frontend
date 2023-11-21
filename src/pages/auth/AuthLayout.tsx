@@ -11,9 +11,9 @@ export default function AuthLayout() {
         <Navigate to="/chat" />
       ) : (
         <div className="bg-secondary flex w-full h-full justify-center items-center ">
-          <div className="flex flex-col md:w-3/4 md:h-3/5 md:min-h-[540px] w-full h-full bg-background rounded-[1.5rem]">
+          <div className="flex flex-col md:w-3/4 md:h-3/5 md:min-h-[600px] w-full h-full bg-background rounded-[1.5rem]">
             <div className="p-5 absolute">
-              <Logo />
+              <Logo bigVersion={false} />
             </div>
             <div className="flex w-full h-full justify-center items-center">
               <section className="flex flex-1 justify-center items-center flex-col py-10">

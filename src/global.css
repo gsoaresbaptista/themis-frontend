@@ -71,6 +71,9 @@
   .topbar {
     @apply sticky top-0 z-50 md:hidden bg-secondary w-full;
   }
+  .sidebar {
+    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[280px] bg-secondary;
+  }
 }
 
 @layer base {

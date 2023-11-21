@@ -5,6 +5,7 @@ import SideBar from "../../components/shared/SideBar";
 import BottomBar from "../../components/shared/BottomBar";
 
 import { useAuth } from "@/context/AuthProvider/useAuth";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function RootLayout() {
   const auth = useAuth();
@@ -18,8 +19,10 @@ export default function RootLayout() {
           <TopBar />
           <SideBar />
 
-          <section className="flex flex-1 h-full">
-            <Outlet />
+          <section className="max-h-screen">
+            <ScrollArea className="flex flex-1 h-full max-h-screen">
+              <Outlet />
+            </ScrollArea>
           </section>
 
           <BottomBar />
