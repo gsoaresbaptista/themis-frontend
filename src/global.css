@@ -52,7 +52,7 @@
     --secondary: 240 6% 5%;
     --secondary-foreground: 210 40% 98%;
  
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 0 0% 15%;
     --muted-foreground: 215 20.2% 65.1%;
  
     --accent: 217.2 32.6% 17.5%;
@@ -80,5 +80,8 @@
 @layer components {
   .shad-input {
     @apply h-12 bg-zinc-950 focus-visible:ring-1 focus-visible:ring-offset-1 !important;
+  }
+  .shad-button_ghost {
+    @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
 }
