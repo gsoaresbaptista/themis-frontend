@@ -6,7 +6,7 @@ function Logo({ bigVersion }: { bigVersion: boolean }) {
       <div
         className={`w-[${40 * scale}px] h-[${
           40 * scale
-        }px] dark:fill-white fill-black`}
+        }px] dark:fill-primary fill-black`}
       >
         <svg
           width={`${40 * scale}px`}
@@ -70,7 +70,7 @@ function Logo({ bigVersion }: { bigVersion: boolean }) {
         </svg>
       </div>
       <h2
-        className={`dark:text-white text-black font-space-grotesk font-bold ${
+        className={`dark:text-primary text-black font-space-grotesk font-bold ${
           bigVersion ? "text-3xl" : "text-lg"
         }`}
       >

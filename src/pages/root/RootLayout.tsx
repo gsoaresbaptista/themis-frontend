@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 
 import TopBar from "../../components/shared/TopBar";
-import SideBar from "../../components/shared/SideBar";
+import SideBar from "../../components/shared/SideBar/SideBar";
 import BottomBar from "../../components/shared/BottomBar";
 
 import { useAuth } from "@/context/AuthProvider/useAuth";

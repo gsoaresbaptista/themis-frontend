@@ -55,14 +55,14 @@
     --muted: 0 0% 15%;
     --muted-foreground: 215 20.2% 65.1%;
  
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 217.2 0% 10%;
     --accent-foreground: 210 40% 98%;
  
     --destructive: 0 75% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --border: 217.2 0% 10%;
+    --input: 217.2 0% 10%;
     --ring: 212.7 26.8% 83.9%;
   }
 }
@@ -73,6 +73,9 @@
   }
   .sidebar {
     @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[280px] bg-secondary;
+  }
+  .base-medium {
+    @apply text-[16px] font-medium leading-[140%];
   }
 }
 
@@ -92,5 +95,20 @@
   }
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
+  }
+  .sidebar-link {
+    @apply rounded-lg base-medium dark:hover:bg-zinc-800 hover:bg-zinc-200 transition cursor-pointer;
+  }
+  .sidebar-link.active {
+    @apply bg-primary;
+  }
+  .sidebar-link.active:hover {
+    @apply bg-primary-hover;
+  }
+  .bg-primary-hover {
+    background-color: hsl(245, 100%, 70%);
+  }
+  .navlink {
+    @apply flex gap-4 items-center p-4;
   }
 }
