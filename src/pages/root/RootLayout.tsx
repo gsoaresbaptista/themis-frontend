@@ -19,8 +19,8 @@ export default function RootLayout() {
           <TopBar />
           <SideBar />
 
-          <section className="max-h-screen">
-            <ScrollArea className="flex flex-1 h-full max-h-screen">
+          <section className="max-h-screen flex-1">
+            <ScrollArea className="flex flex-1 h-full max-h-screen bg-red-500">
               <Outlet />
             </ScrollArea>
           </section>

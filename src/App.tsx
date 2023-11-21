@@ -8,6 +8,8 @@ import { ThemeProvider } from "./components/ui/theme-provider";
 
 import "./global.css";
 import RootLayout from "./pages/root/RootLayout";
+import About from "./pages/root/About";
+import Code from "./pages/root/Code";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
               {/* private routes */}
               <Route element={<RootLayout />}>
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/code" element={<Code />} />
               </Route>
 
             </Routes>
