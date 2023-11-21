@@ -96,6 +96,9 @@
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
+  .shad-button {
+    @apply bg-primary text-white !important;
+  }
   .sidebar-link {
     @apply rounded-lg base-medium dark:hover:bg-zinc-800 hover:bg-zinc-200 transition cursor-pointer;
   }
