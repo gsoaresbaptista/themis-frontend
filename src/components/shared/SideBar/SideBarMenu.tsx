@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 
 import HomeIcon from "@/components/icons/HomeIcon";
@@ -13,13 +13,22 @@ const menuItems = [
   { path: "/chat", label: "Home", icon: HomeIcon },
   { path: "/about", label: "Sobre", icon: AboutIcon },
   { path: "/code", label: "Código", icon: CodeIcon },
-  { path: "#", label: "Configuração", icon: SettingsIcons, onClick: () => alert("clicado") },
+  {
+    path: "/settings",
+    label: "Configuração",
+    icon: SettingsIcons,
+    onClick: (event) => {
+      event.preventDefault();
+      alert("clicado")
+    },
+  },
 ];
 
 function SideBarMenu() {
   const [openDialog, setOpenDialog] = useState(false);
   const { pathname } = useLocation();
-  const liClass = (path: any, item: any) => `sidebar-link group ${pathname === item.path ? "active" : ""}`;
+  const liClass = (path: any, item: any) =>
+    `sidebar-link group ${pathname === item.path ? "active" : ""}`;
 
   return (
     <>
@@ -27,10 +36,14 @@ function SideBarMenu() {
       <ul className="flex flex-1 flex-col gap-6">
         {menuItems.map((item, index) => (
           <li key={index} className={liClass(pathname, item)}>
-            <NavLink to={item.path} className="navlink font-medium" onClick={item.onClick}>
+            <NavLink
+              to={item.path}
+              className="navlink font-medium"
+              onClick={item.onClick}
+            >
               {React.createElement(item.icon, {
                 className: `${
-                  pathname === item.path ? "fill-white" : "dark:fill-primary"
+                  pathname === item.path ? "fill-white" : "fill-primary"
                 }`,
               })}
               {item.label}
@@ -39,14 +52,16 @@ function SideBarMenu() {
         ))}
       </ul>
       <div className="sidebar-link group">
-        <NavLink
+        <Link
           to="#"
           className="navlink font-medium"
-          onClick={() => setOpenDialog(!openDialog)}
+          onClick={(event) => {
+            setOpenDialog(!openDialog);
+          }}
         >
-          <LogoutIcon className="dark:fill-primary" />
+          <LogoutIcon className="fill-primary" />
           Deslogar
-        </NavLink>
+        </Link>
       </div>
     </>
   );

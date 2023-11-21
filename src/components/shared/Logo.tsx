@@ -5,11 +5,11 @@ function Logo({ bigVersion }: { bigVersion: boolean }) {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="dark:fill-primary fill-black">
+      <div className="fill-primary">
         <LotusIcon />
       </div>
       <h2
-        className={`dark:text-primary text-black font-space-grotesk font-bold ${fontSize}`}
+        className={`text-primary font-space-grotesk font-bold ${fontSize}`}
       >
         Themis
       </h2>
