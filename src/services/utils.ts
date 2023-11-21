@@ -1,19 +1,19 @@
-import { get, post } from "./api";
+const formattedTime = new Intl.DateTimeFormat("pt-BR", {
+  hour: "2-digit",
+  minute: "2-digit",
+});
 
-export async function LoadMessages() {
-  return await get("/messages");
+export function formatMessageTime(created_at: string) {
+  // 60 * 60 * 3 * 1000 = (Brazil UTC-3, in ms)
+  return formattedTime.format(
+    Date.parse(created_at) - 60 * 60 * 3 * 1000
+  );
 }
 
-export async function CreateUser({
-  name,
-  email,
-  password,
-  passwordCheck,
-}: {
-  name: string;
-  email: string;
-  password: string;
-  passwordCheck: string;
-}) {
-  return await post("/users/sign-up", { name, email, password, passwordCheck });
+
+export function formatMessage(message: any) {
+    return {
+        ...message,
+        created_at: formatMessageTime(message.created_at)
+    }
 }

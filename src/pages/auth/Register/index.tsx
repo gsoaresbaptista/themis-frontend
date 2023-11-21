@@ -8,7 +8,7 @@ import * as z from "zod";
 
 import { RegisterFormObject, RegisterFormSchema } from "./schema";
 import RegisterForm from "./form";
-import { CreateUser } from "@/services/utils";
+import { CreateUser } from "@/services/operations";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
