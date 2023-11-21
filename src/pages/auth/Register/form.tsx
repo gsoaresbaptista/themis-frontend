@@ -19,8 +19,8 @@ function RegisterForm({
   onSubmit: any;
 }) {
   return (
-    <div>
-      <div className="p-4">
+    <div className="w-full flex flex-col justify-center items-center">
+      <div className="p-4 w-2/4">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
