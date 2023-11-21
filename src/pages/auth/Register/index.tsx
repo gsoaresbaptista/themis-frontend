@@ -1,126 +1,70 @@
-import { useAuth } from "../../../context/AuthProvider/useAuth";
-import { useNavigate, Link } from "react-router-dom";
+import { UserCheck } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-
-const formSchema = z.object({
-  name: z.string().min(8, {
-    message: "O nome deve possuir pelo menos 8 caracteres.",
-  }),
-  email: z.string(),
-  password: z.string(),
-  passwordCheck: z.string(),
-});
+import { RegisterFormObject, RegisterFormSchema } from "./schema";
+import RegisterForm from "./form";
+import { CreateUser } from "@/services/utils";
+import { useEffect, useState } from "react";
 
 export const Register = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      passwordCheck: "",
-    },
-  });
-
-  const auth = useAuth();
   const navigate = useNavigate();
+  const [created, setCreated] = useState(false);
+  const [seconds, setSeconds] = useState(5);
+  const [redirect, setRedirect] = useState(false);
+  const form: any =
+    useForm<z.infer<typeof RegisterFormSchema>>(RegisterFormObject);
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    // const response = await auth.authenticate(email, password);
-    // if (response) {
-    //   navigate('/profile');
-    // } else {
-    //   console.log('E-mail ou senha inválidos!');
-    // }
+  async function onSubmit(data: z.infer<typeof RegisterFormSchema>) {
+    const response = await CreateUser(data);
+
+    if (response.status === 201) {
+      setCreated(true);
+    }
   }
 
+  useEffect(() => {
+    if (created) {
+      const timer = setInterval(() => {
+        setSeconds((prevTime) => {
+          if (prevTime <= 0) {
+            clearInterval(timer);
+            setRedirect(true);
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [created, navigate]);
+
+  useEffect(() => {
+    if (redirect) {
+      navigate("/login", { replace: true });
+    }
+  }, [redirect]);
+
   return (
-    <div>
-      <div className="p-4">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="space-y-0">
-                  <FormLabel>Nome Completo</FormLabel>
-                  <FormControl>
-                    <Input className="shad-input" placeholder="shadcn" {...field} />
-                  </FormControl>
-                  <FormMessage className="absolute" />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="space-y-0">
-                  <FormLabel>E-mail</FormLabel>
-                  <FormControl>
-                    <Input className="shad-input" placeholder="shadcn" {...field} />
-                  </FormControl>
-                  <FormMessage className="absolute" />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem className="space-y-0">
-                  <FormLabel>Senha</FormLabel>
-                  <FormControl>
-                    <Input className="shad-input" placeholder="shadcn" {...field} />
-                  </FormControl>
-                  <FormMessage className="absolute" />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="passwordCheck"
-              render={({ field }) => (
-                <FormItem className="space-y-0">
-                  <FormLabel>Confirme sua senha</FormLabel>
-                  <FormControl>
-                    <Input className="shad-input" placeholder="shadcn" {...field} />
-                  </FormControl>
-                  <FormMessage className="absolute" />
-                </FormItem>
-              )}
-            />
-
-            <Button type="submit" className="w-full text-foreground">
-              Cadastrar
-            </Button>
-          </form>
-        </Form>
-      </div>
-      <div className="flex gap-2">
-        Já possui uma conta?
-        <Link to="/login" className="dark:text-primary text-violet-600">
-          Entre agora!
-        </Link>
-      </div>
-    </div>
+    <>
+      {created ? (
+        <div className="w-3/4">
+          <Alert className="bg-secondary">
+            <UserCheck className="h-4 w-4" />
+            <AlertTitle>Usuário Criado com Sucesso!</AlertTitle>
+            <AlertDescription>
+              Aguarde um momento, pois você será redirecionado para bater um
+              papo com a Themis em {seconds} segundos.
+            </AlertDescription>
+          </Alert>
+        </div>
+      ) : (
+        <RegisterForm onSubmit={onSubmit} form={form} />
+      )}
+    </>
   );
 };
