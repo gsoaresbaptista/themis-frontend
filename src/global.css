@@ -67,6 +67,12 @@
   }
 }
 
+@layer utilities {
+  .topbar {
+    @apply sticky top-0 z-50 md:hidden bg-secondary w-full;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

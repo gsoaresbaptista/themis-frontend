@@ -39,7 +39,7 @@ function LoginForm({
           </Alert>
         </div>
       )}
-      <div className="p-4 w-2/4 flex flex-col">
+      <div className="p-4 w-3/4 md:w-2/4 flex flex-col">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}

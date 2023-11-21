@@ -23,11 +23,21 @@ function TopBar() {
 
   return (
     <section className="topbar">
-      <div className="flex-between py-4 px-5">
+      <div className="flex-between py-4 px-5 flex justify-between">
         <Link to="/">
           <Logo />
         </Link>
-        <div className="flex gap-4">
+        <div className="flex gap-2">
+          <LogoutDialog open={openDialog} setOpen={setOpenDialog} />
+          <div className="flex items-center gap-2">
+            <Avatar>
+              <AvatarFallback>{getNameLetters()}</AvatarFallback>
+            </Avatar>
+            <div className="hidden min-[460px]:block">
+              <p>{auth?.name}</p>
+              <p className="text-sm text-zinc-400">{auth?.email}</p>
+            </div>
+          </div>
           <Button
             variant="ghost"
             className="shad-button_ghost"
@@ -48,10 +58,6 @@ function TopBar() {
               />
             </svg>
           </Button>
-          <LogoutDialog open={openDialog} setOpen={setOpenDialog} />
-          <Avatar>
-            <AvatarFallback>{getNameLetters()}</AvatarFallback>
-          </Avatar>
         </div>
       </div>
     </section>
