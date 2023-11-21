@@ -1,4 +1,4 @@
-import { get, post } from "./api";
+import { get, post, delete_ } from "./api";
 import { formatMessage } from "./utils";
 
 export async function LoadMessages() {
@@ -50,4 +50,14 @@ export async function Question(
     // start reading
     reader?.read().then(processStream);
   });
+}
+
+export async function Clear() {
+  try {
+    const response = await delete_("/messages/clear-chat");
+    const messages = (await response.json()).data.messages;
+    return messages;
+  } catch (error) {
+    return [];
+  }
 }

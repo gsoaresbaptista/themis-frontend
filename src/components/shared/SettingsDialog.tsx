@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 import { useTheme } from "../ui/theme-provider";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import ClearDialog from "./Clear";
+import ClearDialog from "./ClearDialog";
 
 import {
   Select,

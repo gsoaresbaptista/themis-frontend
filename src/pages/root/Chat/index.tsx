@@ -15,6 +15,7 @@ const Chat = () => {
       reloadMessages();
     }
   }, []);
+
   function reloadMessages() {
     const fetchMessages = async () => {
       const messages = await LoadMessages();

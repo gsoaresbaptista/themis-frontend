@@ -34,3 +34,16 @@ export async function get(endpoint: string) {
     },
   });
 }
+
+export async function delete_(endpoint: string) {
+  const url = `${baseURL}${endpoint}`;
+  const user = getUserLocalStorage();
+
+  return await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user?.accessToken}`,
+    },
+  });
+}
