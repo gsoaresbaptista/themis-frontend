@@ -10,7 +10,7 @@ export default function AuthLayout() {
       {auth?.uuid ? (
         <Navigate to="/chat" />
       ) : (
-        <div className="bg-secondary flex w-full justify-center items-center ">
+        <div className="bg-secondary flex w-full h-full justify-center items-center ">
           <div className="flex flex-col md:w-3/4 md:h-3/5 w-full h-full bg-background rounded-[1.5rem]">
             <div className="p-5 absolute">
               <Logo />

@@ -11,7 +11,7 @@ import "./global.css";
 
 function App() {
   return (
-    <main className="flex h-screen">
+    <main className="flex flex-col h-screen">
       <AuthProvider>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <BrowserRouter>
