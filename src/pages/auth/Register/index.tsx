@@ -10,6 +10,7 @@ import { RegisterFormObject, RegisterFormSchema } from "./schema";
 import RegisterForm from "./form";
 import { CreateUser } from "@/services/utils";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -61,6 +62,12 @@ export const Register = () => {
               papo com a Themis em {seconds} segundos.
             </AlertDescription>
           </Alert>
+          <p className="justify-center mt-3 flex gap-2">
+            Está com presa?
+            <Link to="/login" className="text-primary font-bold">
+              Clique aqui!
+            </Link>
+          </p>
         </div>
       ) : (
         <RegisterForm onSubmit={onSubmit} form={form} />

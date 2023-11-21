@@ -16,9 +16,15 @@ const passwordType = z
 
 export const RegisterFormSchema = z
   .object({
-    name: z.string().min(8, {
-      message: "O nome deve possuir pelo menos 8 caracteres.",
-    }),
+    name: z
+      .string()
+      .min(4, {
+        message: "O nome deve possuir pelo menos 4 caracteres.",
+      })
+      .refine(
+        (name) => name.split(" ").length > 1,
+        "Por favor, digite seu nome completo."
+      ),
     email: z.string().email("E-mail inválido."),
     password: passwordType,
     passwordCheck: z.string().min(1, "Não pode ser vazio."),
