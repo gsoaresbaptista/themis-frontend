@@ -1,7 +1,7 @@
 function Logo() {
   return (
     <div className="flex items-center gap-2">
-      <div className="w-10 h-10  dark:fill-primary fill-slate-950">
+      <div className="w-10 h-10 dark:fill-primary fill-black">
         <svg width="40px" height="40px" viewBox="0 0 40 40">
           <path
             d="M 39.738281 20.136719 C 39.136719 19.480469 38.351562 19.015625 37.480469 18.71875
@@ -59,7 +59,7 @@ function Logo() {
           />
         </svg>
       </div>
-      <h2 className="dark:text-primary text-slate-950 font-space-grotesk text-lg font-medium">
+      <h2 className="dark:text-primary text-black font-space-grotesk text-lg font-medium">
         Themis
       </h2>
     </div>

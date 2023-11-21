@@ -83,7 +83,7 @@ function LoginForm({
                 )}
               />
             </div>
-            <Button type="submit" className="w-full text-foreground">
+            <Button type="submit" className="w-full dark:text-foreground">
               Entrar
             </Button>
           </form>

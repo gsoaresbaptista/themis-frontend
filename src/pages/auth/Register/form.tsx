@@ -97,7 +97,7 @@ function RegisterForm({
               )}
             />
 
-            <Button type="submit" className="w-full text-foreground">
+            <Button type="submit" className="w-full dark:text-foreground">
               Cadastrar
             </Button>
           </form>

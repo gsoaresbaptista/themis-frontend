@@ -14,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
  
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 262 83% 58%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -79,7 +79,7 @@
 
 @layer components {
   .shad-input {
-    @apply h-12 bg-zinc-950 focus-visible:ring-1 focus-visible:ring-offset-1 !important;
+    @apply h-12 dark:bg-zinc-950 focus-visible:ring-1 focus-visible:ring-offset-1 !important;
   }
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
