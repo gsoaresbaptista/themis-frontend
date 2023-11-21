@@ -1,15 +1,21 @@
+import { NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
+
 import HomeIcon from "@/components/icons/HomeIcon";
 import AboutIcon from "@/components/icons/AboutIcon";
 import CodeIcon from "@/components/icons/CodeIcon";
 import SettingsIcons from "@/components/icons/SettingsIcon";
 import LogoutIcon from "@/components/icons/logoutIcon";
-import { NavLink, useLocation } from "react-router-dom";
+
+import LogoutDialog from "../LogoutDialog";
 
 function SideBarMenu() {
+  const [openDialog, setOpenDialog] = useState(false);
   const { pathname } = useLocation();
 
   return (
     <>
+      <LogoutDialog open={openDialog} setOpen={setOpenDialog} />
       <ul className="flex flex-1 flex-col gap-6">
         <li
           className={`sidebar-link group ${
@@ -65,7 +71,11 @@ function SideBarMenu() {
         </li>
       </ul>
       <div className="sidebar-link group">
-        <NavLink to="/chat" className="navlink font-medium">
+        <NavLink
+          to="#"
+          className="navlink font-medium"
+          onClick={() => setOpenDialog(!openDialog)}
+        >
           <LogoutIcon className="dark:fill-primary" />
           Deslogar
         </NavLink>
