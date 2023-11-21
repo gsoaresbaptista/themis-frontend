@@ -1,4 +1,5 @@
 import { AuthProvider } from "./context/AuthProvider";
+import { MessageProvider } from "./context/MessagesProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Register } from "./pages/auth/Register";
 import { Login } from "./pages/auth/Login";
@@ -15,26 +16,26 @@ function App() {
   return (
     <main className="flex flex-col h-screen">
       <AuthProvider>
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <BrowserRouter>
-            <Routes>
+        <MessageProvider>
+          <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <BrowserRouter>
+              <Routes>
+                {/* public routes */}
+                <Route element={<AuthLayout />}>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </Route>
 
-              {/* public routes */}
-              <Route element={<AuthLayout />}>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-              </Route>
-
-              {/* private routes */}
-              <Route element={<RootLayout />}>
-                <Route path="/chat" element={<Chat />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/code" element={<Code />} />
-              </Route>
-
-            </Routes>
-          </BrowserRouter>
-        </ThemeProvider>
+                {/* private routes */}
+                <Route element={<RootLayout />}>
+                  <Route path="/chat" element={<Chat />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/code" element={<Code />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </ThemeProvider>
+        </MessageProvider>
       </AuthProvider>
     </main>
   );

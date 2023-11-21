@@ -10,8 +10,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-
-import { Clear } from "@/services/operations";
+import { useMessageContext } from "@/context/MessagesProvider/useMessages";
 
 interface ClearDialogProps {
   open: boolean;
@@ -19,13 +18,7 @@ interface ClearDialogProps {
 }
 
 const ClearDialog: React.FC<ClearDialogProps> = ({ open, setOpen }) => {
-  function clearMessages() {
-    const deleteOperation = async () => {
-      await Clear();
-    }
-    deleteOperation();
-    localStorage.setItem('messages', JSON.stringify([]));
-  }
+  const data = useMessageContext();
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -40,7 +33,7 @@ const ClearDialog: React.FC<ClearDialogProps> = ({ open, setOpen }) => {
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction
             className="dark:text-foreground"
-            onClick={() => clearMessages()}
+            onClick={async () => await data.clearMessages()}
           >
             Confirmar exclusão
           </AlertDialogAction>

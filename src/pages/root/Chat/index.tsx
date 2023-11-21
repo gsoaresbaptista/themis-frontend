@@ -1,45 +1,29 @@
-import { useEffect, useState } from "react";
-import { LoadMessages, Question } from "../../../services/operations";
 import { Button } from "@/components/ui/button";
+import { useMessageContext } from "@/context/MessagesProvider/useMessages";
+import { useState } from "react";
 
 const Chat = () => {
   const [message, setMessage] = useState<string>("");
-  const [messages, setMessages] = useState<any>([]);
-
-  useEffect(() => {
-    const messages = localStorage.getItem("messages");
-
-    if (messages) {
-      setMessages(JSON.parse(messages));
-    } else {
-      reloadMessages();
-    }
-  }, []);
-
-  function reloadMessages() {
-    const fetchMessages = async () => {
-      const messages = await LoadMessages();
-      setMessages(messages);
-      localStorage.setItem("messages", JSON.stringify(messages));
-    };
-    fetchMessages();
-  }
-
-  const question = () => {
-    Question("The real secret of the", (_, fullMessage) => {
-      setMessage(fullMessage);
-    });
-  };
+  const data = useMessageContext();
 
   return (
     <>
       <h2>Converse com a themis</h2>
       <div className="flex gap-1">
-        <Button onClick={question} className="shad-button">Perguntar</Button>
-        <Button onClick={() => reloadMessages()} className="shad-button">Recarregar</Button>
+        <Button
+          onClick={() =>
+            data.question("test question", (_, msg) => setMessage(msg))
+          }
+          className="shad-button"
+        >
+          Perguntar
+        </Button>
+        <Button onClick={async () => await data.updateMessages()} className="shad-button">
+          Recarregar
+        </Button>
       </div>
       <div>{message}</div>
-      {messages.map((message: any) => (
+      {data?.messages?.map((message: any) => (
         <div key={message.id}>
           <b>
             <p>{message.question}</p>
