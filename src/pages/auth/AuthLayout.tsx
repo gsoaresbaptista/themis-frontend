@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider/useAuth";
-import Logo from "@/components/ui/logo";
+import Logo from "@/components/shared/Logo";
 
 export default function AuthLayout() {
   const auth = useAuth();

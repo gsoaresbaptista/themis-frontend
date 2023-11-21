@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { LoadMessages, Question } from "../../../services/operations";
-import { ProtectedLayout } from "../../../components/ProtectedLayout";
 
 const Chat = () => {
   const [message, setMessage] = useState<string>("");
@@ -21,7 +20,6 @@ const Chat = () => {
   };
 
   return (
-    <ProtectedLayout>
       <>
         <h2>Converse com a themis</h2>
         <button onClick={question}>Perguntar</button>
@@ -36,7 +34,6 @@ const Chat = () => {
           </div>
         ))}
       </>
-    </ProtectedLayout>
   );
 };
 

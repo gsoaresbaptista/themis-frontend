@@ -7,27 +7,31 @@ import BottomBar from "../../components/shared/BottomBar";
 import { useAuth } from "@/context/AuthProvider/useAuth";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+import { ProtectedLayout } from "@/components/ProtectedLayout";
+
 export default function RootLayout() {
   const auth = useAuth();
 
   return (
     <>
-      {!auth?.uuid ? (
-        <Navigate to="/login" />
-      ) : (
-        <div className="w-full md:flex">
-          <TopBar />
-          <SideBar />
+      <ProtectedLayout>
+        {!auth?.uuid ? (
+          <Navigate to="/login" />
+        ) : (
+          <div className="w-full md:flex">
+            <TopBar />
+            <SideBar />
 
-          <section className="max-h-screen flex-1">
-            <ScrollArea className="flex flex-1 h-full max-h-screen">
-              <Outlet />
-            </ScrollArea>
-          </section>
+            <section className="max-h-screen flex-1">
+              <ScrollArea className="flex flex-1 h-full max-h-screen">
+                <Outlet />
+              </ScrollArea>
+            </section>
 
-          <BottomBar />
-        </div>
-      )}
+            <BottomBar />
+          </div>
+        )}
+      </ProtectedLayout>
     </>
   );
 }

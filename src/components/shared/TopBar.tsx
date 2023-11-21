@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from "../ui/logo";
+import Logo from "./Logo";
 import { Button } from "../ui/button";
 import LogoutDialog from "./LogoutDialog";
 import { useState } from "react";

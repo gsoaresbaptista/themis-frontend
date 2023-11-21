@@ -1,20 +1,11 @@
-function Logo({ bigVersion }: { bigVersion: boolean }) {
-  const scale = bigVersion ? 1.1 : 1;
+import { IconProps } from "./types";
 
+function LotusIcon({ className, width = 40, height = 40 }: IconProps) {
   return (
-    <div className="flex items-center gap-2">
-      <div
-        className={`w-[${40 * scale}px] h-[${
-          40 * scale
-        }px] dark:fill-primary fill-black`}
-      >
-        <svg
-          width={`${40 * scale}px`}
-          height={`${40 * scale}px`}
-          viewBox="0 0 40 40"
-        >
-          <path
-            d="M 39.738281 20.136719 C 39.136719 19.480469 38.351562 19.015625 37.480469 18.71875
+    <svg width={`${width}px`} height={`${height}px`} viewBox="0 0 40 40">
+      <path
+        className={className}
+        d="M 39.738281 20.136719 C 39.136719 19.480469 38.351562 19.015625 37.480469 18.71875
                  C 36.617188 18.429688 35.652344 18.296875 34.636719 18.296875
                  C 34.082031 18.296875 33.511719 18.332031 32.929688 18.414062
                  C 33.074219 17.578125 33.152344 16.714844 33.152344 15.84375
@@ -66,18 +57,9 @@ function Logo({ bigVersion }: { bigVersion: boolean }) {
                  C 33.296875 19.808594 33.988281 19.75 34.636719 19.75 C 35.527344 19.75 36.332031 19.867188 37.015625 20.097656
                  C 37.5625 20.277344 38.023438 20.535156 38.402344 20.859375 C 37.363281 24.960938 35.449219 27.546875 32.957031 29.171875
                  Z M 32.957031 29.171875 "
-          />
-        </svg>
-      </div>
-      <h2
-        className={`dark:text-primary text-black font-space-grotesk font-bold ${
-          bigVersion ? "text-3xl" : "text-lg"
-        }`}
-      >
-        Themis
-      </h2>
-    </div>
+      />
+    </svg>
   );
 }
 
-export default Logo;
+export default LotusIcon;
