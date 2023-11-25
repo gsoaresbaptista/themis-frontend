@@ -5,7 +5,6 @@ import SideBar from "../../components/shared/SideBar/SideBar";
 import BottomBar from "../../components/shared/BottomBar";
 
 import { useAuth } from "@/context/AuthProvider/useAuth";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { ProtectedLayout } from "@/components/ProtectedLayout";
 
@@ -18,16 +17,10 @@ export default function RootLayout() {
         {!auth?.uuid ? (
           <Navigate to="/login" />
         ) : (
-          <div className="w-full flex flex-col md:flex-row min-h-full">
+          <div className="w-full flex flex-col md:flex-row min-h-full items-center">
             <TopBar />
             <SideBar />
-
-            <section className="max-h-screen flex-1">
-              <ScrollArea className="flex flex-1 h-full max-h-screen">
-                <Outlet />
-              </ScrollArea>
-            </section>
-
+            <Outlet />
             <BottomBar />
           </div>
         )}
