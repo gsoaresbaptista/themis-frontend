@@ -77,6 +77,12 @@
   .base-medium {
     @apply text-[16px] font-medium leading-[140%];
   }
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+  .tiny-medium {
+    @apply text-[12px] font-medium leading-[140%];
+  }
 }
 
 @layer base {
@@ -115,7 +121,13 @@
     background-color: hsl(245, 100%, 70%);
   }
   .navlink {
-    @apply flex gap-4 items-center p-4 text-primary;
+    @apply flex gap-4 items-center p-4 text-primary flex-col md:flex-row;
+  }
+  .navlink > svg {
+    @apply w-[16px] h-[16px] md:w-[24px] md:h-[24px];
+  }
+  .navlink > p {
+    @apply tiny-medium md:text-base;
   }
   .tabItem {
     @apply flex items-start;
@@ -125,5 +137,8 @@
   }
   .tabButton.active {
     @apply bg-secondary;
+  }
+  .bottom-bar {
+    @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-secondary px-5 py-4 md:hidden;
   }
 }

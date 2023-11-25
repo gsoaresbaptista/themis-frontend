@@ -11,8 +11,13 @@ export async function LoadMessages() {
 export async function GetLastMessage() {
   const response = await get("/messages/last");
   const data = await response.json();
-  const message = formatMessage(data.data.message);
-  return message;
+
+  if (data.data.message) {
+    const message = formatMessage(data.data.message);
+    return message;
+  }
+
+  return null;
 }
 
 export async function CreateUser({
@@ -32,20 +37,20 @@ export async function CreateUser({
 export async function Question(
   question: string,
   callback: (msg: string, fullMessage: string) => void,
-  onFinish?: (fullMessage: string) => any,
+  onFinish?: (fullMessage: string) => any
 ) {
   let fullMessage = "";
 
   await post("/messages/question", { question: question }).then((response) => {
     const reader = response?.body?.getReader();
 
-    function processStream({
+    async function processStream({
       done,
       value,
     }: ReadableStreamReadResult<Uint8Array>) {
       if (done) {
         if (onFinish) {
-          setTimeout(() => onFinish(fullMessage), 1000)
+         await onFinish(fullMessage);
         }
         return;
       }

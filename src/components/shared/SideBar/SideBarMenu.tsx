@@ -36,7 +36,7 @@ function SideBarMenu() {
     <>
       <LogoutDialog open={openDialog} setOpen={setOpenDialog} />
       <SettingsDialog open={openSettings} setOpen={setOpenSettings} />
-      <ul className="flex flex-1 flex-col gap-6">
+      <ul className="flex flex-1 md:flex-col gap-6 justify-around md:justify-start max-w-full">
         {menuItems.map((item, index) => (
           <li key={index} className={liClass(pathname, item)}>
             <NavLink
@@ -49,12 +49,12 @@ function SideBarMenu() {
                   pathname === item.path ? "fill-white" : "fill-primary"
                 }`,
               })}
-              {item.label}
+              <p>{item.label}</p>
             </NavLink>
           </li>
         ))}
       </ul>
-      <div className="sidebar-link group">
+      <div className="sidebar-link group hidden md:block">
         <Link
           to="#"
           className="navlink font-medium"

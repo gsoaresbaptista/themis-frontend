@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useMessageContext } from "@/context/MessagesProvider/useMessages";
 
 interface SettingsDialogProps {
   open: boolean;
@@ -22,6 +23,7 @@ const SettingsDialog: React.FC<SettingsDialogProps> = ({ open, setOpen }) => {
   const [tab, setTab] = useState("general");
   const [clear, setClear] = useState(false);
   const { theme, setTheme } = useTheme();
+  const data = useMessageContext();
 
   const itemClass = (name: string) =>
     `tabButton ${name === tab ? "active" : "inactive"}`;
@@ -72,7 +74,13 @@ const SettingsDialog: React.FC<SettingsDialogProps> = ({ open, setOpen }) => {
                 </div>
                 <div className="flex justify-between items-center">
                   <p>Limpar toda conversa</p>
-                  <Button variant="destructive" onClick={() => setClear(true)}>Limpar</Button>
+                  <Button
+                    variant="destructive"
+                    onClick={() => setClear(true)}
+                    disabled={data.loading}
+                  >
+                    Limpar
+                  </Button>
                   <ClearDialog open={clear} setOpen={setClear} />
                 </div>
               </div>

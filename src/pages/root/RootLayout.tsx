@@ -18,7 +18,7 @@ export default function RootLayout() {
         {!auth?.uuid ? (
           <Navigate to="/login" />
         ) : (
-          <div className="w-full md:flex">
+          <div className="w-full flex flex-col md:flex-row min-h-full">
             <TopBar />
             <SideBar />
 

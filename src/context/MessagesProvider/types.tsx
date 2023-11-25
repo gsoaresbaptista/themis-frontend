@@ -8,8 +8,9 @@ export interface Message {
 
 export interface MessageContextProps {
   messages: Message[];
+  loading: boolean;
   setMessages: (messages: Message[]) => void;
-  question: (text: string, callback: (msg: string, fullMSG: string) => void) => void;
+  question: (text: string) => void;
   updateMessages: () => Promise<void>;
   clearMessages: () => Promise<void>;
 }
