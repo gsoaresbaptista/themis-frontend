@@ -24,7 +24,6 @@ export async function errorHandler(...args: any) {
         accessToken: body?.data?.access_token,
         refreshToken: body?.data?.refresh_token,
       });
-
       const updatedConfigs = {
         ...config,
         headers: {

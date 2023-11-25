@@ -8,6 +8,13 @@ export async function LoadMessages() {
   return messages;
 }
 
+export async function GetLastMessage() {
+  const response = await get("/messages/last");
+  const data = await response.json();
+  const message = formatMessage(data.data.message);
+  return message;
+}
+
 export async function CreateUser({
   name,
   email,
@@ -24,7 +31,8 @@ export async function CreateUser({
 
 export async function Question(
   question: string,
-  callback: (msg: string, fullMessage: string) => void
+  callback: (msg: string, fullMessage: string) => void,
+  onFinish?: (fullMessage: string) => any,
 ) {
   let fullMessage = "";
 
@@ -36,6 +44,9 @@ export async function Question(
       value,
     }: ReadableStreamReadResult<Uint8Array>) {
       if (done) {
+        if (onFinish) {
+          setTimeout(() => onFinish(fullMessage), 1000)
+        }
         return;
       }
 

@@ -6,6 +6,8 @@ import {
   setUserLocalStorage,
 } from "./utils";
 
+import { Navigate } from "react-router-dom";
+
 export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
@@ -44,6 +46,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   async function logout() {
     setUser(null);
     setUserLocalStorage(null);
+    Navigate({to: "/login"});
   }
 
   return (

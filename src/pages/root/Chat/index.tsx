@@ -22,16 +22,14 @@ const Chat = () => {
           Recarregar
         </Button>
       </div>
-      <div>{message}</div>
       {data?.messages?.map((message: any) => (
         <div key={message.id}>
-          <b>
-            <p>{message.question}</p>
-            {message.created_at}
-          </b>
+          <b><p>{message.question}</p></b>
           <p>{message.answer}</p>
+          <p>{message.created_at}</p>
         </div>
       ))}
+      <div>{message}</div>
     </>
   );
 };
