@@ -30,8 +30,9 @@
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --input: 214.3 31.8% 70%;
+    --ring: 0 0% 5%;
+    /* --ring: 222.2 84% 4.9%; */
 
     --radius: 0.5rem;
   }
@@ -63,7 +64,8 @@
 
     --border: 217.2 0% 10%;
     --input: 217.2 0% 10%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 212.7 10% 33.9%;
+    /* --ring: 212.7 26.8% 83.9%; */
   }
 }
 
@@ -180,5 +182,14 @@
   }
   .bottom-bar {
     @apply z-50 flex-between w-full absolute bottom-0 rounded-t-[20px] bg-secondary px-5 py-4 md:hidden;
+  }
+  .message {
+    @apply px-3 py-3 rounded-md max-w-[90%];
+  }
+  .userMessage {
+    @apply bg-secondary/50 float-left;
+  }
+  .botMessage {
+    @apply float-right bg-secondary/50 mt-4 min-w-[90%];
   }
 }
