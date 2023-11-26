@@ -192,4 +192,7 @@
   .botMessage {
     @apply float-right bg-secondary/50 mt-4 min-w-[90%];
   }
+  .message-date {
+    @apply text-right text-white/30 text-sm -mt-1;
+  }
 }

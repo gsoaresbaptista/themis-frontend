@@ -6,7 +6,7 @@ import LotusIcon from "@/components/icons/LotusIcon";
 import { SendIcon } from "lucide-react";
 
 const Chat = () => {
-  const { messages, loading, question, uapdateMessages } = useMessageContext();
+  const { messages, loading, question } = useMessageContext();
   const [shouldScroll, setShouldScroll] = useState(true);
   const [questionInput, setQuestionInput] = useState<string>("");
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -45,26 +45,30 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col w-full max-h-[80vh] md:max-h-[95vh] md:h-screen justify-center overflow-x-hidden">
-      <div className="flex flex-col md:p-8 md:m-8 m-4 p-4 h-[90%] items-center">
+    <div className="flex flex-col w-full h-full md:h-screen justify-center overflow-x-hidden flex-1">
+      <div className="flex flex-col max-h-full items-center box-border py-5 px-10 xl:px-0 min-h-[65vh] md:min-h-[100vh]">
         <div
-          className="overflow-y-scroll pr-8 xl:max-w-3xl w-full gap-8 flex flex-col flex-1 overflow-x-hidden min-h-3/4"
+          className="overflow-y-scroll overflow-x-hidden pr-8 xl:max-w-3xl xl:min-w-[48rem] max-w-xl min-w[36rem] gap-8 flex flex-col flex-1 min-h-3/4"
           ref={messagesContainerRef}
           onScroll={handleScroll}
         >
           {messages.length > 0 ? (
             messages?.map((message: any) => (
-              <div key={message.id} className="w-full">
+              <div key={message.id} className="w-full flex flex-col gap-4">
                 <div className="flex gap-4 items-start">
                   <div className="bg-secondary/50 p-2 rounded-full">
                     <UserIcon />
                   </div>
                   <div className="userMessage message">
                     <p>{message.question}</p>
+                    <p className="message-date">{message.created_at}</p>
                   </div>
                 </div>
                 <div className="flex items-end gap-4 w-full">
-                  <div className="botMessage message">{message.answer}</div>
+                  <div className="botMessage message">
+                    {message.answer}
+                    <p className="message-date">{message.created_at}</p>
+                  </div>
                   <div className="bg-secondary/50 p-2 rounded-full">
                     <LotusIcon
                       width={28}
@@ -73,7 +77,6 @@ const Chat = () => {
                     />
                   </div>
                 </div>
-                {/* <p>{message.created_at}</p> */}
               </div>
             ))
           ) : (
