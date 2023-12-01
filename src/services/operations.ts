@@ -37,11 +37,15 @@ export async function CreateUser({
 export async function Question(
   question: string,
   callback: (msg: string, fullMessage: string) => void,
-  onFinish?: (fullMessage: string) => any
+  onFinish?: (fullMessage: string) => any,
+  continueAnswer?: boolean
 ) {
   let fullMessage = "";
+  const postPromise = continueAnswer
+    ? post("/messages/continue", {})
+    : post("/messages/question", { question: question });
 
-  await post("/messages/question", { question: question }).then((response) => {
+  await postPromise.then((response) => {
     const reader = response?.body?.getReader();
 
     async function processStream({
@@ -50,7 +54,7 @@ export async function Question(
     }: ReadableStreamReadResult<Uint8Array>) {
       if (done) {
         if (onFinish) {
-         await onFinish(fullMessage);
+          await onFinish(fullMessage);
         }
         return;
       }

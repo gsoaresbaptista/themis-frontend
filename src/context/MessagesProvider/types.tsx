@@ -4,6 +4,7 @@ export interface Message {
   question: string;
   answer: string;
   created_at: string;
+  unix: number;
 }
 
 export interface MessageContextProps {
@@ -11,6 +12,7 @@ export interface MessageContextProps {
   loading: boolean;
   setMessages: (messages: Message[]) => void;
   question: (text: string) => void;
+  continueAnswer: () => void;
   updateMessages: () => Promise<void>;
   clearMessages: () => Promise<void>;
 }

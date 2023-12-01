@@ -29,6 +29,7 @@ const createFakeMessage = (question: string = "", answer: string = "") => {
 interface IDependencies {
   question: string;
   messages: Message[];
+  continue: boolean;
 }
 
 export const MessageProvider = ({ children }: IMessagesProvider) => {
@@ -36,9 +37,11 @@ export const MessageProvider = ({ children }: IMessagesProvider) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [questionText, setQuestionText] = useState<string>("");
+  const [continueText, setContinueText] = useState<boolean>(false);
   const [dependencies, setDependencies] = useState<IDependencies>({
     question: "",
     messages: messages,
+    continue: false,
   });
 
   const updateMessages = async () => {
@@ -73,15 +76,25 @@ export const MessageProvider = ({ children }: IMessagesProvider) => {
 
   useEffect(() => {
     setDependencies((prev: IDependencies) => {
-      return questionText !== prev.question && messages !== prev.messages
-        ? ({ question: questionText, messages } as IDependencies)
+      return (questionText !== prev.question && messages !== prev.messages) ||
+        prev.continue !== continueText
+        ? ({
+            question: questionText,
+            messages,
+            continue: continueText,
+          } as IDependencies)
         : prev;
     });
-  }, [questionText, messages]);
+  }, [questionText, messages, continueText]);
 
   useEffect(() => {
-    if (dependencies?.question !== "") {
-      Question(dependencies.question, updateAnswer, addMessageOnFinish);
+    if (dependencies?.question !== "" || dependencies?.continue) {
+      Question(
+        dependencies.question,
+        updateAnswer,
+        addMessageOnFinish,
+        dependencies.continue
+      );
     }
   }, [dependencies]);
 
@@ -89,11 +102,11 @@ export const MessageProvider = ({ children }: IMessagesProvider) => {
     let lastMessage = null;
 
     do {
-      lastMessage = await GetLastMessage();
       await delay(250);
+      lastMessage = await GetLastMessage();
     } while (
       lastMessage === null ||
-      lastMessage?.answer !== messages.slice(-1)[0].answer
+      lastMessage?.unix === messages.slice(-1)[0].unix
     );
 
     const updated = [...messages.slice(0, -1), lastMessage];
@@ -104,6 +117,7 @@ export const MessageProvider = ({ children }: IMessagesProvider) => {
     setMessagesLocalStorage(uniques);
     setQuestionText("");
     setLoading(false);
+    setContinueText(false);
   }
 
   const question = (text: string) => {
@@ -111,15 +125,26 @@ export const MessageProvider = ({ children }: IMessagesProvider) => {
       setLoading(true);
       setMessages([...messages, createFakeMessage(text)]);
       setQuestionText(text);
+      setContinueText(false);
     } catch (error) {
       auth.logout();
     }
   };
 
-  const updateAnswer = (_: string, fullMessage: string) => {
+  const continueAnswer = () => {
+    try {
+      setLoading(true);
+      setQuestionText("");
+      setContinueText(true);
+    } catch (error) {
+      auth.logout();
+    }
+  };
+
+  const updateAnswer = (message: string, fullMessage: string) => {
     const old = messages.slice(0, -1);
     const updated = messages.slice(-1)[0];
-    updated.answer = fullMessage;
+    updated.answer += message;
     const updatedMessages = [...old, updated];
     setMessages(updatedMessages);
     setMessagesLocalStorage(updatedMessages);
@@ -134,6 +159,7 @@ export const MessageProvider = ({ children }: IMessagesProvider) => {
         question,
         updateMessages,
         clearMessages,
+        continueAnswer,
       }}
     >
       {children}

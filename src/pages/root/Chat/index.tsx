@@ -4,9 +4,10 @@ import { Textarea } from "@/components/ui/textarea";
 import UserIcon from "@/components/icons/UserIcon";
 import LotusIcon from "@/components/icons/LotusIcon";
 import { SendIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Chat = () => {
-  const { messages, loading, question } = useMessageContext();
+  const { messages, loading, question, continueAnswer } = useMessageContext();
   const [shouldScroll, setShouldScroll] = useState(true);
   const [questionInput, setQuestionInput] = useState<string>("");
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -30,6 +31,17 @@ const Chat = () => {
     if (!loading && questionInput !== "") {
       setQuestionInput("");
       await question(questionInput);
+      if (messagesContainerRef.current) {
+        messagesContainerRef.current.scrollTop =
+          messagesContainerRef.current.scrollHeight;
+      }
+    }
+  };
+
+  const handleContinueClick = async () => {
+    if (!loading) {
+      setQuestionInput("");
+      await continueAnswer();
       if (messagesContainerRef.current) {
         messagesContainerRef.current.scrollTop =
           messagesContainerRef.current.scrollHeight;
@@ -66,13 +78,14 @@ const Chat = () => {
                 </div>
                 <div className="flex items-end gap-4 w-full">
                   <div className="botMessage message">
-                    {/* {message.answer.replace("\n", "<br>")} */}
-                    {message.answer.split("\n").map((line: string, index: number) => (
-                      <React.Fragment key={index}>
-                        {line}
-                        {index < message.answer.length - 1 && <br />}
-                      </React.Fragment>
-                    ))}
+                    {message.answer
+                      .split("\n")
+                      .map((line: string, index: number) => (
+                        <React.Fragment key={index}>
+                          {line}
+                          {index < message.answer.length - 1 && <br />}
+                        </React.Fragment>
+                      ))}
                     <p className="message-date">{message.created_at}</p>
                   </div>
                   <div className="bg-secondary/50 p-2 rounded-full">
@@ -95,6 +108,16 @@ const Chat = () => {
                 />
               </div>
               <h2 className="mt-5 text-xl">Como posso ajudar você hoje?</h2>
+            </div>
+          )}
+          {messages.length > 0 && (
+            <div className="continue-container">
+              <Button
+                className="continue-btn"
+                onClick={async () => await handleContinueClick()}
+              >
+                Continuar
+              </Button>
             </div>
           )}
         </div>
