@@ -45,8 +45,8 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-full md:h-screen justify-center overflow-x-hidden flex-1">
-      <div className="flex flex-col max-h-full items-center box-border py-5 px-10 xl:px-0 min-h-[65vh] md:min-h-[100vh]">
+    <div className="flex flex-col w-full h-full md:h-screen justify-center overflow-x-hidden lg:flex-1">
+      <div className="flex flex-col max-h-full items-center box-border py-5 px-10 xl:px-0 min-h-[65vh] lg:min-h-[100vh]">
         <div
           className="overflow-y-scroll overflow-x-hidden pr-8 xl:max-w-3xl xl:min-w-[48rem] max-w-xl min-w[36rem] gap-8 flex flex-col flex-1 min-h-3/4"
           ref={messagesContainerRef}
@@ -66,7 +66,13 @@ const Chat = () => {
                 </div>
                 <div className="flex items-end gap-4 w-full">
                   <div className="botMessage message">
-                    {message.answer}
+                    {/* {message.answer.replace("\n", "<br>")} */}
+                    {message.answer.split("\n").map((line: string, index: number) => (
+                      <React.Fragment key={index}>
+                        {line}
+                        {index < message.answer.length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
                     <p className="message-date">{message.created_at}</p>
                   </div>
                   <div className="bg-secondary/50 p-2 rounded-full">

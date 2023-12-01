@@ -15,8 +15,16 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
   useEffect(() => {
     const user = getUserLocalStorage();
+    
     if (user) {
-      setUser(user);
+      // check refresh token validation
+      const expires = new Date(user.refreshToken.expires_in);
+
+      if (expires > new Date()) {
+        setUser(user);
+      } else {
+        logout();
+      }
     }
   }, []);
 
