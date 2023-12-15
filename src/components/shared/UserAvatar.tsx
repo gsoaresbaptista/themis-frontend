@@ -19,11 +19,13 @@ function UserAvatar() {
   return (
     <div className="flex items-center gap-2">
       <Avatar>
-        <AvatarFallback>{getNameLetters()}</AvatarFallback>
+        <AvatarFallback className="leading-10">
+            <span className="h-[15px] leading-5">{getNameLetters()}</span>
+        </AvatarFallback>
       </Avatar>
       <div className="hidden min-[460px]:block">
         <p>{auth?.name}</p>
-        <p className="text-sm text-zinc-400">{auth?.email}</p>
+        <p className="text-sm text-foreground/75">{auth?.email}</p>
       </div>
     </div>
   );

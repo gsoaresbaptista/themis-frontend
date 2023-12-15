@@ -29,26 +29,30 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   }, []);
 
   async function authenticate(email: string, password: string) {
-    const response = await LoginRequest(email, password);
-    
-    if (response?.status == 200) {
-      const body = await response.json();
+    try {
+      const response = await LoginRequest(email, password);
 
-      const payload = {
-        uuid: body.data?.user?.id,
-        name: body.data?.user?.name,
-        email: body.data?.user?.email,
-        refreshToken: body.data?.refresh_token,
-        accessToken: body.data?.access_token,
-      };
+      if (response?.status == 200) {
+        const body = await response.json();
+  
+        const payload = {
+          uuid: body.data?.user?.id,
+          name: body.data?.user?.name,
+          email: body.data?.user?.email,
+          refreshToken: body.data?.refresh_token,
+          accessToken: body.data?.access_token,
+        };
+  
+        setUser(payload);
+        setUserLocalStorage(payload);
+  
+        return true;
+      }
 
-      setUser(payload);
-      setUserLocalStorage(payload);
-
-      return true;
+      return false;
+    } catch (error) {
+      return false;
     }
-
-    return false;
   }
 
   async function logout() {

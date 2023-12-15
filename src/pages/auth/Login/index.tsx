@@ -16,6 +16,7 @@ export const Login = () => {
 
   async function onSubmit(values: z.infer<typeof LoginFormSchema>) {
     const { email, password } = values;
+
     const response = await auth.authenticate(email, password);
     if (response) {
       navigate("/chat");

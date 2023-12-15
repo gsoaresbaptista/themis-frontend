@@ -68,7 +68,7 @@ const Chat = () => {
             messages?.map((message: any) => (
               <div key={message.id} className="w-full flex flex-col gap-4">
                 <div className="flex gap-4 items-start">
-                  <div className="bg-secondary/50 p-2 rounded-full">
+                  <div className="bg-secondary/75 p-2 rounded-full">
                     <UserIcon />
                   </div>
                   <div className="userMessage message">
@@ -88,7 +88,7 @@ const Chat = () => {
                       ))}
                     <p className="message-date">{message.created_at}</p>
                   </div>
-                  <div className="bg-secondary/50 p-2 rounded-full">
+                  <div className="bg-secondary/75 p-2 rounded-full">
                     <LotusIcon
                       width={28}
                       height={28}

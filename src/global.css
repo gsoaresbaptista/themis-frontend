@@ -187,16 +187,16 @@
     @apply px-3 py-3 rounded-md max-w-[90%];
   }
   .userMessage {
-    @apply bg-secondary/50 float-left;
+    @apply bg-secondary/75 float-left;
   }
   .botMessage {
-    @apply float-right bg-secondary/50 mt-4 min-w-[90%];
+    @apply float-right bg-secondary/75 mt-4 min-w-[90%];
   }
   .message-date {
-    @apply text-right text-white/30 text-sm;
+    @apply text-right text-foreground/80 text-sm;
   }
   .continue-btn {
-    @apply bg-secondary/50 text-foreground/50 rounded-full border border-primary/10 !important;
+    @apply bg-secondary/75 text-foreground/75 rounded-full border border-primary/10 !important;
   }
   .continue-container {
     @apply flex justify-center;
