@@ -1,6 +1,6 @@
 import { AuthProvider } from "./context/AuthProvider";
 import { MessageProvider } from "./context/MessagesProvider";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Register } from "./pages/auth/Register";
 import { Login } from "./pages/auth/Login";
 import Chat from "./pages/root/Chat";
@@ -22,6 +22,7 @@ function App() {
               <Routes>
                 {/* public routes */}
                 <Route element={<AuthLayout />}>
+                  <Route path="/" element={<Navigate to='/login' />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                 </Route>
