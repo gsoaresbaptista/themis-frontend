@@ -115,6 +115,7 @@ const Chat = () => {
               <Button
                 className="continue-btn"
                 onClick={async () => await handleContinueClick()}
+                disabled={loading}
               >
                 Continuar
               </Button>
