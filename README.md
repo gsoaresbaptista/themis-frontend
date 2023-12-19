@@ -18,6 +18,8 @@ Antes de começar, certifique-se de ter instalado:
 
 ## Como Rodar o Projeto
 
+O projeto necessita que a máquina tenha instalado o npm para executar o front-end. Esse trabalho utilizou a versão `10.2.5` do npm.
+
 Para iniciar o front-end do Themis, siga estas etapas:
 
 1. Clone o repositório:
