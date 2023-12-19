@@ -78,7 +78,7 @@ const Chat = () => {
                 </div>
                 <div className="flex items-end gap-4 w-full">
                   <div className="botMessage message">
-                    {message.answer
+                    {message.answer.replace(/<0x0A>/g, '\n').replace(/^\n/, '')
                       .split("\n")
                       .map((line: string, index: number) => (
                         <React.Fragment key={index}>
